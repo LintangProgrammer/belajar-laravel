@@ -1,7 +1,59 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MyController;
+use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Route;   
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::get('test-model', function () {
+    //menampilkan semua data dari model post
+    $data = App\Models\Post::all();
+    return $data;
 });
+
+Route::get('create-data-post', function () {
+    //membuat data baru melalui model
+    $data = App\Models\Post::create();([
+    'title'=>'Belajar PHP',
+    'content'=>'lorem ipsum'
+]);
+return $data;
+});
+
+Route::get('show-data', function ($id) {
+    //menampilkan semua data dari model post
+    $data = App\Models\Post::find($id);
+    return $data;
+});
+
+Route::get('edit-data/{id}', function ($id) {
+    //menampilkan semua data dari model post
+    $data = App\Models\Post::find($id);
+    $data->title = "membangun Project dengan Laravel";
+    $data->save();
+    return $data;
+});
+
+Route::get('delete-data/{id}', function ($id) {
+    //menampilkan semua data dari model post
+    $data = App\Models\Post::find($id);
+    $data->delete();
+    return redirect('test-model');
+});
+
+Route::get('search/{cari}', function ($query) {
+    //mencari data berdasarkan title yang mirip seperti (like)
+    $data = App\Models\Post::where('title','like','%'. $query .'%')->get();
+    return $data;   
+});
+
+// pemanggilan url menggunakan controller
+Route::get('greetings', [MyController::class, 'hello']);
+Route::get('student', [MyController::class, 'siswa']);
+Route::get('post', [PostController::class, 'index']);
+
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

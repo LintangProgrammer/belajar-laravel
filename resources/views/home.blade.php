@@ -13,8 +13,8 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+                        Selamat Datang Lintang di ASSADIG(Assalaam Digital Library)
 
-                        Selamat Datang Gurilemz
                     </div>
                 </div>
             </div>

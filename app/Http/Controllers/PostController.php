@@ -8,11 +8,54 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    //daftar post
-    public function index()
+    //beri middleware 'auth' untuk mengecek sudah login atau belum
+    public function __construct()
     {
         // menampilkan semua data dari model post
+        $this->middleware('auth');
+    }
+      
+        // menampilkan semua data dari model post
+        public function index(){
         $post = Post::all();
         return view('post.index', compact('post'));
     }
+
+    public function create()
+    {
+        return view('post.create');
+    }
+
+    public function store(Request $request)
+    {
+        $post = new Post;
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save();
+        return redirect()->route('post.index');
+    }
+
+    public function edit($id)
+    {
+        // mencari data post berdasarkan parameter 'id'
+        $post = Post::findOrFail($id);
+        return view('post.edit', compact('post'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->save(); //di simpan ke db
+        //  di alihkan ke halaman post melalui route post.index
+        return redirect()->route('post.index'); 
+    }
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('post.index');
+    }
 }
+

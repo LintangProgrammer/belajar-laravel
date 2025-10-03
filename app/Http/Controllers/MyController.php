@@ -22,4 +22,6 @@ class MyController extends Controller
         ];
         return view('siswa', compact('data'));
     }
+
+    
 }

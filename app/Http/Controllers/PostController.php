@@ -42,6 +42,13 @@ class PostController extends Controller
         return view('post.edit', compact('post'));
     }
 
+    public function show($id)
+    {
+        // mencari data post berdasarkan parameter 'id'
+        $post = Post::findOrFail($id);
+        return view('post.show', compact('post'));
+    }
+
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);

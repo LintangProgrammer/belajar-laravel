@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;   
+use Illuminate\Support\Facades\Route;  
+use App\Http\Controllers\BiodataController; 
 
 
 Route::get('test-model', function () {
@@ -65,6 +65,14 @@ Route::post('post', [PostController::class, 'store'])->name('post.store');
 // edit data post
 Route::get('post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
 Route::put('post/{id}', [PostController::class, 'update'])->name('post.update');
+
+// show data
+Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
 // hapus data
 Route::delete('post/{id}', [PostController::class, 'destroy'])->name('post.delete');
+
+Route::resource('produk', App\Http\Controllers\ProdukController::class)->middleware('auth');
+
+Route::resource('biodata', BiodataController::class);
+
 

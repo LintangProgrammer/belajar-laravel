@@ -6,7 +6,7 @@
                 <fieldset>
                     <legend>Data Post</legend>
                     <a href="{{route('post.create')}}" class="btn btn-sm btn-primary" style="align:float-right">Tambah Data</a>
-                   
+
                     <div class="table-responsive py-2">
                     <table class="table" border="1">
                         <tr>
@@ -21,11 +21,14 @@
                                 <th>{{$data->title}}</th>
                                 <th>{{Str::limit($data->content, 100)}}</th>
                                 <th>
-                                    <form action="{{route('post.delete',$data->id)}}" method="post">
+                                    <form action="{{route('post.delete', $data->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
-                                    <a href="{{route('post.edit',$data->id)}}" class="btn btn-sm btn-success">
+                                    <a href="{{route('post.edit', $data->id)}}" class="btn btn-sm btn-success">
                                         Edit
+                                    </a>
+                                    <a href="{{route('post.show', $data->id)}}" class="btn btn-sm btn-warning">
+                                        Show
                                     </a>
                                     <button type="submit" onclick="return confirm('apakah anda yakin?')" 
                                     class="btn btn-sm btn-danger">Delete</button>

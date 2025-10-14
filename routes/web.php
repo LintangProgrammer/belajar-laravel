@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Relasicontroller;
 use Illuminate\Support\Facades\Route;  
 use App\Http\Controllers\BiodataController; 
 
@@ -74,5 +75,35 @@ Route::delete('post/{id}', [PostController::class, 'destroy'])->name('post.delet
 Route::resource('produk', App\Http\Controllers\ProdukController::class)->middleware('auth');
 
 Route::resource('biodata', BiodataController::class);
+
+Route::get('/one-to-one', [
+    Relasicontroller::class,
+    'oneToOne'
+]);
+
+// routes/web.php
+use App\Models\Wali;
+
+Route::get('/wali-ke-mahasiswa', function () {
+    $wali = Wali::with('mahasiswa')->first();
+    return "{$wali->nama} adalah wali dari {$wali->mahasiswa->nama}";
+});
+
+// routes/web.php
+Route::get('/one-to-many', [RelasiController::class, 'oneToMany']);
+
+// routes/web.php
+Route::get('/many-to-many', [RelasiController::class, 'manyToMany']);
+
+// 
+Route::get('eloquent', [RelasiController::class, 'eloquent']);
+
+
+
+
+
+
+
+
 
 

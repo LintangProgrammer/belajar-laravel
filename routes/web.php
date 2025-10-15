@@ -5,6 +5,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\Relasicontroller;
 use Illuminate\Support\Facades\Route;  
 use App\Http\Controllers\BiodataController; 
+use App\Http\Controllers\DosenController;
+use App\Http\Controllers\HobiController; 
 
 
 Route::get('test-model', function () {
@@ -98,7 +100,9 @@ Route::get('/many-to-many', [RelasiController::class, 'manyToMany']);
 // 
 Route::get('eloquent', [RelasiController::class, 'eloquent']);
 
+Route::resource('dosen', DosenController::class);
 
+Route::resource('hobi', HobiController::class);
 
 
 

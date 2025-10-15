@@ -26,8 +26,8 @@
 
                     <div class="mt-3">
                         <ul>
-                            <li>Nama Wali: <strong> {{ $temp->wali->nama ?? '-' }} </strong></li>
-                            <li>Dosen Pembimbing: <strong>{{ $temp->dosen->nama ?? '-' }}</strong></li>
+                            <li>Nama Wali: <strong> {{ ($temp->wali)->nama ?? '-' }} </strong></li>
+                            <li>Dosen Pembimbing: <strong>{{ ($temp->dosen)->nama ?? '-' }}</strong></li>
                         </ul>
                     </div>
                 </div>

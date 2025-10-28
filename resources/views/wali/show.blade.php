@@ -103,7 +103,7 @@
                     <div class="card-body">
 
                         <h4 class="fw-bold">{{ $wali->nama }}</h4>
-                        <p><strong>Dosen Pembimbing:</strong> {{ $wali->mahasiswa->nama }}</p>
+                        <p><strong>Mahasiswa :</strong> {{ $wali->mahasiswa->nama }}</p>
                     </div>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                         <use xlink:href="#bootstrap"></use>
                     </svg>
                 </a>
-                <span class="text-muted">Lintang Nur Wijaya XI RPL 3 </span>
+                <span class="text-muted"> Lintang Nur Wijaya</span>
             </div>
 
             <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">

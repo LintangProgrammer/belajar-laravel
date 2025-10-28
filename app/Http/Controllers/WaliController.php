@@ -1,26 +1,22 @@
 <?php
 namespace App\Http\Controllers;
-use App\Models\Wali;
+
 use App\Models\Mahasiswa;
+use App\Models\Wali;
 use Illuminate\Http\Request;
+
 class WaliController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $wali = Wali::latest()->get();
-        return view('wali.index', compact('wali'));
+        $walis = Wali::latest()->get();
+        return view('wali.index', compact('walis'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        $wali = Wali::all();
-        return view('wali.create', compact('wali'));
+        $mahasiswas = Mahasiswa::all();
+        return view('wali.create', compact('mahasiswas'));
     }
 
     /**
@@ -28,13 +24,15 @@ class WaliController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'nama' => 'required',
-            'id_mahasiswa' => 'required|exists:mahasiswas,id|unique:walis',
-        ]);
+        $validate = $request->validate(
+            [
+                'nama'         => 'required',
+                'id_mahasiswa' => 'required|exists:mahasiswas,id',
+            ]
+        );
 
-        $wali = new Wali();
-        $wali->nama = $request->nama;
+        $wali               = new Wali();
+        $wali->nama         = $request->nama;
         $wali->id_mahasiswa = $request->id_mahasiswa;
         $wali->save();
         return redirect()->route('wali.index');
@@ -54,7 +52,7 @@ class WaliController extends Controller
      */
     public function edit(string $id)
     {
-        $wali = Wali::findOrFail($id);
+        $wali      = Wali::findOrFail($id);
         $mahasiswa = Mahasiswa::all();
         return view('wali.edit', compact('wali', 'mahasiswa'));
     }
@@ -64,13 +62,15 @@ class WaliController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validate = $request->validate([
-            'nama' => 'required',
-            'id_mahasiswa' => 'required|exists:mahasiswas,id',
-        ]);
+        $validate = $request->validate(
+            [
+                'nama'         => 'required',
+                'id_mahasiswa' => 'required|exists:mahasiswas,id',
+            ]
+        );
 
-        $wali =  Wali::findOrFail($id);
-        $wali->nama = $request->nama;
+        $wali               = Wali::findOrFail($id);
+        $wali->nama         = $request->nama;
         $wali->id_mahasiswa = $request->id_mahasiswa;
         $wali->save();
         return redirect()->route('wali.index');

@@ -6,8 +6,7 @@ use App\Http\Controllers\Relasicontroller;
 use Illuminate\Support\Facades\Route;  
 use App\Http\Controllers\BiodataController; 
 use App\Http\Controllers\DosenController;
-use App\Http\Controllers\HobiController; 
-
+use App\Http\Controllers\HobiController;    
 
 Route::get('test-model', function () {
     //menampilkan semua data dari model post
@@ -104,7 +103,9 @@ Route::resource('dosen', DosenController::class);
 
 Route::resource('hobi', HobiController::class);
 
+Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);
 
+Route::resource('wali', App\Http\Controllers\WaliController::class);
 
 
 

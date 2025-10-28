@@ -46,6 +46,6 @@ class HobiController extends Controller
     public function destroy(Hobi $hobi)
     {
         $hobi->delete();
-        return redirect()->route('hobi.index        ')->with('success', 'Data hobi berhasil dihapus!');
+        return redirect()->route('hobi.index')->with('success', 'Data hobi berhasil dihapus!');
     }
 }

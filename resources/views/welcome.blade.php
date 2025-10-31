@@ -14,7 +14,7 @@
                             </div>
                         @endif
 
-                        Selamat Datang Gurilemz
+                        Selamat Datang Lintang
                     </div>
                 </div>
             </div>

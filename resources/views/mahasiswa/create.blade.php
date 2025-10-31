@@ -26,6 +26,7 @@
                             </span>
                             @enderror
                         </div>
+                        <label for="">Dosen Pembimbing</label>
                         <div class="mb-3">
                             <select name="id_dosen" class="form-control @error('id_dosen') is invalid
                             @enderror">
@@ -37,8 +38,16 @@
                       <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                       </span>
-                      @enderror  
-                    </div>
+                      @enderror 
+                    </div> 
+                      <div class="mb-3">
+                        <label for="">Pilih Hobi</label>
+                        <select name="hobi[]" id="" class="form-control js-multiple" multiple>
+                            @foreach ($hobi as $data )
+                            <option value="{{ $data->id }}">{{ $data->nama_hobi}}</option>
+                            @endforeach
+                        </select>
+                      </div>
                     <div class="mb-3">
                         <button type="submit" class="btn btn-block btn-primary">Simpan</button>
                     </div>

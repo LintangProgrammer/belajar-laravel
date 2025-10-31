@@ -6,7 +6,7 @@ use App\Http\Controllers\Relasicontroller;
 use Illuminate\Support\Facades\Route;  
 use App\Http\Controllers\BiodataController; 
 use App\Http\Controllers\DosenController;
-use App\Http\Controllers\HobiController;    
+use App\Http\Controllers\HobiController;
 
 Route::get('test-model', function () {
     //menampilkan semua data dari model post
@@ -73,7 +73,7 @@ Route::get('post/{id}', [PostController::class, 'show'])->name('post.show');
 // hapus data
 Route::delete('post/{id}', [PostController::class, 'destroy'])->name('post.delete');
 
-Route::resource('produk', App\Http\Controllers\ProdukController::class)->middleware('auth');
+
 
 Route::resource('biodata', BiodataController::class);
 
@@ -107,8 +107,5 @@ Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);
 
 Route::resource('wali', App\Http\Controllers\WaliController::class);
 
-
-
-
-
-
+use App\Http\Controllers\PelangganController;
+Route::resource('pelanggan', PelangganController::class);

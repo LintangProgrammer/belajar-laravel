@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class BiodataController extends Controller
 {
+
     public function index()
     {
         $biodatas = Biodata::all();

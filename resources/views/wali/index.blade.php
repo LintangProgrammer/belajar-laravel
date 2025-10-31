@@ -23,7 +23,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Daftar Nama Siswa</th>
-                                        <th>Nama Wali</th>
+                                        <th>Nama Wali  </th>
                                     </tr>
                                 </thead>
                                 <tbody>

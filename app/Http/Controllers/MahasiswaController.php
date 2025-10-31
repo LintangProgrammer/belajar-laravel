@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Dosen;
 use App\Models\Mahasiswa;
+use App\Models\Hobi;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Validator;
 class MahasiswaController extends Controller
 {
     /**
@@ -12,6 +13,8 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
+        $dosen = Dosen::all();
+        $hobi = Hobi::all();
         $mahasiswa = Mahasiswa::latest()->get();
         return view('mahasiswa.index', compact('mahasiswa'));
     }
@@ -22,7 +25,8 @@ class MahasiswaController extends Controller
     public function create()
     {
         $dosen = Dosen::all();
-        return view('mahasiswa.create', compact('dosen'));
+        $hobi = Hobi::all();
+        return view('mahasiswa.create', compact('dosen', 'hobi'));
     }
 
     /**
@@ -33,7 +37,7 @@ class MahasiswaController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'nim' => 'required|unique:mahasiswas',
-            'id_dosen' => 'required|exist:dosen,id',
+            'id_dosen' => 'required|exists:dosen,id',
         ]);
 
         $mahasiswa = new Mahasiswa();
@@ -58,6 +62,8 @@ class MahasiswaController extends Controller
      */
     public function edit(string $id)
     {
+        $hobi = Hobi::all();
+        $dosen = Dosen::all();
         $mahasiswa = Mahasiswa::findOrFail($id);
         return view('mahasiswa.edit', compact('mahasiswa'));
     }
@@ -70,7 +76,7 @@ class MahasiswaController extends Controller
         $validated = $request->validate([
             'nama' => 'required',
             'nim' => 'required|unique:mahasiswas',
-            'id_dosen' => 'required|exist:dosen,id',
+            'id_dosen' => 'required|exists:dosen,id',
         ]);
 
         $mahasiswa =  Mahasiswa::findOrFail($id);
@@ -78,6 +84,13 @@ class MahasiswaController extends Controller
         $mahasiswa->nim = $request->nim;
         $mahasiswa->id_dosen = $request->id_dosen;
         $mahasiswa->save();
+
+        // attach melampirkan banyak data atau many to many
+        $mahasiswa->hobis()->attach($request->hobi);
+
+        // sync memperbarui data yang di ubah dari many to many
+        $mahasiswa->hobis()->sync($request->hobi);
+
         return redirect()->route('mahasiswa.index');
     }
 
@@ -88,6 +101,8 @@ class MahasiswaController extends Controller
     {
         $mahasiswa = Mahasiswa::findOrFail($id);
         $mahasiswa->delete();
+
+        
         return redirect()->route('mahasiswa.index');
     }
 }

@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\MyController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\Relasicontroller;
+use App\Http\Controllers\RelasiController;
 use Illuminate\Support\Facades\Route;  
 use App\Http\Controllers\BiodataController; 
 use App\Http\Controllers\DosenController;
 use App\Http\Controllers\HobiController;
+use App\Http\Controllers\PelangganController;
+use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\ProdukController;
 
 Route::get('test-model', function () {
     //menampilkan semua data dari model post
@@ -107,5 +110,13 @@ Route::resource('mahasiswa', App\Http\Controllers\MahasiswaController::class);
 
 Route::resource('wali', App\Http\Controllers\WaliController::class);
 
-use App\Http\Controllers\PelangganController;
-Route::resource('pelanggan', PelangganController::class);
+Route::resource('pelanggan',PelangganController::class);
+
+Route::prefix('latihan')->group(function () {
+    Route::get('/transaksi/search', [TransaksiController::class, 'search'])->name('transaksi.search');
+    Route::resource('pelanggan', App\Http\Controllers\PelangganController::class);
+    Route::resource('produk', App\Http\Controllers\ProdukController::class);
+    Route::resource('transaksi', App\Http\Controllers\TransaksiController::class);
+    Route::resource('pembayaran', App\Http\Controllers\PembayaranController::class);
+
+})->middleware('auth');

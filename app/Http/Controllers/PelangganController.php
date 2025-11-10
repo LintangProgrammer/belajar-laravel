@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Pelanggan;
 use Illuminate\Http\Request;
 
@@ -10,8 +9,8 @@ class PelangganController extends Controller
     
     public function index()
     {
-        $pelanggans = Pelanggan::all();
-        return view('pelanggan.index', compact('pelanggans'));
+        $pelanggan = Pelanggan::all();
+        return view('pelanggan.index', compact('pelanggan'));
     }
     public function create()
     {
@@ -23,7 +22,7 @@ class PelangganController extends Controller
         $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
-            'no_telp' => 'required'
+            'telepon' => 'required'
         ]);
 
         Pelanggan::create($request->all());
@@ -40,7 +39,7 @@ class PelangganController extends Controller
         $request->validate([
             'nama' => 'required',
             'alamat' => 'required',
-            'no_telp' => 'required'
+            'telepon' => 'required'
         ]);
 
         $pelanggan->update($request->all());
@@ -52,4 +51,11 @@ class PelangganController extends Controller
         $pelanggan->delete();
         return redirect()->route('pelanggan.index')->with('success', 'Data pelanggan berhasil dihapus!');
     }
+
+    public function show($id)
+    {
+    $pelanggan = Pelanggan::findOrFail($id);
+    return view('pelanggan.show', compact('pelanggan'));
+    }
+
 }

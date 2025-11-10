@@ -24,7 +24,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        $dosen = Dosen::all();
+        $dosens = Dosen::all();
         $hobi = Hobi::all();
         return view('mahasiswa.create', compact('dosen', 'hobi'));
     }

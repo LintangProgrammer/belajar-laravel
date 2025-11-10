@@ -1,64 +1,52 @@
 @extends('layouts.app')
-@section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="float-start">
-                            {{ __('Pelanggan') }}
-                        </div>
-                        <div class="float-end">
-                            <a href="{{ route('pelanggan.create') }}" class="btn btn-sm btn-outline-primary">Tambah Data</a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>No HP</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php $no = 1; @endphp
-                                    @forelse ($pelanggans as $data)
-                                        <tr>
-                                            <td>{{ $no++ }}</td>
-                                            <td>{{ $data->nama }}</td>
-                                            <td>{{ $data->alamat }}</td>
-                                            <td>{{ $data->no_telp }}</td>
-                                            <td>
-                                                <form action="{{ route('pelanggan.destroy', $data->id) }}" method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a href="{{ route('pelanggan.show', $data->id) }}"
-                                                        class="btn btn-sm btn-outline-dark">Show</a>
-                                                    <a href="{{ route('pelanggan.edit', $data->id) }}"
-                                                        class="btn btn-sm btn-outline-success">Edit</a>
-                                                    <button type="submit" onsubmit="return confirm('Are You Sure ?');"
-                                                        class="btn btn-sm btn-danger">Delete</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td colspan="6" class="text-center">
-                                                Data Belum Tersedia
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                                </tbody>
-                            </table>
-                        </div>
 
-                    </div>
-                </div>
-            </div>
+@section('content')
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>Daftar Pelanggan</h3>
+            <a href="{{ route('pelanggan.create') }}" class="btn btn-primary"> Tambah Data Pelanggan</a>
         </div>
+
+        @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+        @endif
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>Telepon</th>
+                    <th>Aksi</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @php $no = 1; @endphp
+                @forelse ($pelanggan as $data)
+                    <tr>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ $data->nama }}</td>
+                        <td>{{ $data->alamat }}</td>
+                        <td>{{ $data->telepon }}</td>
+
+                        <td>
+                    <form action="{{ route('pelanggan.destroy', $data->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <a href="{{ route('pelanggan.show', $data->id) }}" class="btn btn-sm btn-outline-dark">Show</a>
+                        <a href="{{ route('pelanggan.edit', $data->id) }}" class="btn btn-sm btn-outline-success">Edit</a>
+                        <button type="submit" onsubmit="return confirm('Are You Sure ?');" class="btn btn-sm btn-danger">Delete</button>
+                    </td>
+                    </form>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="5" class="text-center">Belum ada data pelanggan</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 @endsection

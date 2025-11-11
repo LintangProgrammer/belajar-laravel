@@ -11,14 +11,14 @@ class TransaksiController extends Controller
     public function index()
     {
         $transaksi = Transaksi::with(['pelanggan', 'produks'])->latest()->get();
-        return view('latihan.transaksi.index', compact('transaksi'));
+        return view('transaksi.index', compact('transaksi'));
     }
 
     public function create()
     {
         $pelanggan = Pelanggan::all();
         $produk    = Produk::all();
-        return view('latihan.transaksi.create', compact('pelanggan', 'produk'));
+        return view('transaksi.create', compact('pelanggan', 'produk'));
     }
 
     public function store(Request $request)
@@ -73,7 +73,7 @@ class TransaksiController extends Controller
     public function show($id)
     {
         $transaksi = Transaksi::with(['pelanggan', 'produks'])->findOrFail($id);
-        return view('latihan.transaksi.show', compact('transaksi'));
+        return view('transaksi.show', compact('transaksi'));
     }
 
     public function edit($id)

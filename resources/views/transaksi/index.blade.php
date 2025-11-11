@@ -25,7 +25,7 @@
             </div>
         @endif
 
-        @if($transaki->count() > 0)
+        @if($transaksi->count() > 0)
             <div class="table-responsive">
                 <table class="table table-bordered align-middle text-center">
                     <thead class="table-light">
